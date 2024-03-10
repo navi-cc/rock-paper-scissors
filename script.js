@@ -1,115 +1,93 @@
 const playButton = document.querySelector('#play-button')
-const foo = document.querySelector('.game');
-const faa = document.querySelector('.game-container')
+const mainMenu = document.querySelector('.main-menu');
+const game = document.querySelector('.game-container')
 
 playButton.addEventListener('click', () => {
-    foo.style.display = 'none';
-    faa.style.display = 'flex';
+    mainMenu.style.display = 'none';
+    game.style.display = 'flex';
 });
+
 
 
 let playerScoreHolder = 0;
 let computerScoreHolder = 0;
+let round = 0;
+
+function resetGame() {
+    playerScoreHolder = 0;
+    computerScoreHolder = 0;
+    round = 0;
+
+    playerScoreDisplay.textContent = 0;
+    computerScoreDisplay.textContent = 0;
+    stateRoundWinner.textContent = '';
+}
+
+
 
 const playerChoice = document.querySelector('.choices-container');
-
 playerChoice.addEventListener('click', (e) => {
 
     let target = e.target;
     let computerChoice;  
 
-    const playerScore = document.querySelector('#player-score');
-    const computerScore = document.querySelector('#computer-score');
-
     switch (target.id) {
 
         case 'rock':
         computerChoice = getComputerChoice();
-        scoring('rock', computerChoice);
-        stateGameWinner(playerScoreHolder, computerScoreHolder);
-        playerScore.textContent = playerScoreHolder;
-        computerScore.textContent = computerScoreHolder;
-
+        gameScoring('rock', computerChoice);    
         break;
 
         case 'paper':
         computerChoice = getComputerChoice();
-        scoring('paper', computerChoice);
-        stateGameWinner(playerScoreHolder, computerScoreHolder);
-        playerScore.textContent = playerScoreHolder;
-        computerScore.textContent = computerScoreHolder;
-
+        gameScoring('paper', computerChoice);
         break;
 
         case 'scissors':
         computerChoice = getComputerChoice();
-        scoring('scissors', computerChoice);
-        stateGameWinner(playerScoreHolder, computerScoreHolder);
-        playerScore.textContent = playerScoreHolder;
-        computerScore.textContent = computerScoreHolder;
-        
+        gameScoring('scissors', computerChoice);
         break;
     }
+
 });
 
 
+
+const playerScoreDisplay = document.querySelector('#player-score');
+const computerScoreDisplay = document.querySelector('#computer-score');
 
 const winnerHolder = document.querySelector('.winner-holder');
 const winner = document.querySelector('#winner');
 const playAgainButton = document.querySelector('#play-again-btn');
 
+function stateGameWinner()  {
 
-
-function stateGameWinner(playerScoreHolder, computerScoreHolder) {
-    
     if (playerScoreHolder === 5) {
+        winner.textContent = 'Player Wins The Game!';
+    } winner.textContent = 'Computer Wins The Game!';
 
+    if (playerScoreHolder === 5 || computerScoreHolder === 5) {
         document.body.style.backgroundColor = '#202020';
-        faa.style.display = 'none';
+        game.style.display = 'none';
         winnerHolder.style.display = 'flex';
-
-        winner.textContent = 'Player Wins The Game!'
-
-        playAgainButton.addEventListener('click', () => {
-            document.body.style.backgroundColor = '#fdfdfd';
-            playerScoreHolder = 0;
-            computerScoreHolder = 0;
-
-            winnerHolder.style.display = 'none';
-            faa.style.display = 'flex';
-        });
-
     }
+    
 
-    if (computerScoreHolder === 5) {
+    playAgainButton.addEventListener('click', () => {
 
-        document.body.style.backgroundColor = '#202020';
-        faa.style.display = 'none';
-        winnerHolder.style.display = 'flex';
-
-        winner.textContent = 'Computer Wins The Game!'
-
-        playAgainButton.addEventListener('click', () => {
-            document.body.style.backgroundColor = '#fdfdfd';
+        document.body.style.backgroundColor = '#fdfdfd';
+        winnerHolder.style.display = 'none';
+        game.style.display = 'flex';
+        resetGame();
             
-            playerScoreHolder = 0;
-            computerScoreHolder = 0;
-
-            winnerHolder.style.display = 'none';
-            faa.style.display = 'flex';
-        });
-
-    }
+    });
 
 }
 
 
 
-
 const stateRoundWinner = document.querySelector('#round-winner');
-let round = 0;
-
-function scoring(playerChoice, computerChoice) {
+function gameScoring(playerChoice, computerChoice) {
 
     if (playerChoice === computerChoice) {
         ++round;
@@ -121,62 +99,23 @@ function scoring(playerChoice, computerChoice) {
         ++playerScoreHolder;
         ++round;
         stateRoundWinner.textContent = `Player wins in Round ${round}!`;
+        playerScoreDisplay.textContent = playerScoreHolder;
+        stateGameWinner();
 
     } else {
-
         ++computerScoreHolder;
         ++round;
         stateRoundWinner.textContent = `Computer wins in Round ${round}!`;
-
+        computerScoreDisplay.textContent = computerScoreHolder;
+        stateGameWinner();
     }
 
 }
 
 
-function getComputerChoice() {
 
+function getComputerChoice() {
     const choice = ["rock", "paper", "scissors"];
     const randomized = Math.floor(Math.random() * choice.length);
-
     return choice[randomized];
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

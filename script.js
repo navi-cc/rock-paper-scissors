@@ -29,24 +29,22 @@ const playerChoice = document.querySelector('.choices-container');
 playerChoice.addEventListener('click', (e) => {
 
     let target = e.target;
-    let computerChoice;  
+    let computerChoice = getComputerChoice(); 
 
     switch (target.id) {
 
         case 'rock':
-        computerChoice = getComputerChoice();
         gameScoring('rock', computerChoice);    
         break;
 
         case 'paper':
-        computerChoice = getComputerChoice();
         gameScoring('paper', computerChoice);
         break;
 
         case 'scissors':
-        computerChoice = getComputerChoice();
         gameScoring('scissors', computerChoice);
         break;
+        
     }
 
 });

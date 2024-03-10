@@ -9,14 +9,14 @@ body {
 }
 
 
-.game {
+.main-menu {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: auto;
 }
 
-.game > p {
+.main-menu > p {
     font-size: 5rem;
 }
 
@@ -52,21 +52,22 @@ body {
     width: 500px;
     height: 300px;
 
+    padding: 20px;
     
 }
 
 #winner {
-    font-size: 5rem;
+    font-size: 2.5rem;
     font-weight: 800;
 }
 
 #play-again-btn {
-    color: #d6d6d6;;
+    color: #1cb10e;
     font-size: 20px;
     font-weight: 800;
-
+    
     background-color: transparent;
-    border: solid 3px #d6d6d6;
+    border: solid 3px #1cb10e;
     border-radius: 10px;
 
     cursor: pointer;
